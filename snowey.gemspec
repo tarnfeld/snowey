@@ -4,8 +4,8 @@ require File.expand_path('../lib/snowey/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Tom Arnfeld"]
   gem.email         = ["tarnfeld@me.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{To be written}
+  gem.summary       = %q{To be written}
   gem.homepage      = "http://github.com/tarnfeld/snowey"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
