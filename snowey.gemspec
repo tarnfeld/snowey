@@ -14,4 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "snowey"
   gem.require_paths = ["lib"]
   gem.version       = Snowey::VERSION
+
+  gem.add_dependency  "trollop"
+  gem.add_dependency  "eventmachine"
 end
