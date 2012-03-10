@@ -12,6 +12,9 @@ module Snowey
       @address = args[:address] || ADDRESS
       @port = args[:port] || PORT
 
+      Logger.verbose(args[:verbose] || VERBOSE)
+      Logger.debug(args[:debug] || DEBUG)
+
       Logger.message "Welcome to Snowey. Version #{VERSION}"
       listen
     end
@@ -54,12 +57,10 @@ module Snowey
       begin
         parser = Parser::CommandParser.new(data)
         output = parser.parse
-        send_data output
+        send_data "Some output #{output}\n"
       rescue Parser::Error => e
-        send_data "ERR #{e.message}"
+        send_data "ERR #{e.message}\n"
       end
-
-      close_connection_after_writing
     end
 
     def unbind

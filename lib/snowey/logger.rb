@@ -3,13 +3,32 @@ module Snowey
 
   module Logger
 
+    # Should the logger be verbose?
+    @verbose = true
+    @debug = false
+
+    def verbose opt
+      @verbose = opt
+    end
+
+    def debug opt
+      @debug = opt
+    end
+
     def message message
-      puts "#{prefix} - #{message}"
+      puts "#{prefix} - #{message}" unless !@verbose
     end
 
     def error error
-      puts color("#{prefix} - #{error}", "#FF0000")
+      puts color("#{prefix} - #{error}", "#FF0000") unless !@verbose
     end
+
+    def debug message
+      puts "#{prefix} #{color(message, '#FFFF0000')}" unless !@debug
+    end
+
+    module_function :verbose
+    module_function :debug
 
     module_function :message
     module_function :error

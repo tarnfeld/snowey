@@ -7,6 +7,7 @@ module Snowey
     class Error < Error; end
     class UnknownCommand < Error; end
     class ExecutionError < Error; end
+    class InvalidInput < Error; end
 
     module CommandManager
 
@@ -42,6 +43,12 @@ module Snowey
 
       def parse
         parsed = @input.split(" ")
+
+        if !parsed || parsed.length <= 0
+          Logger.error "Invalid input data"
+          raise InvalidInput.new "Invalid input data"
+        end
+
         @command = parsed.shift.upcase
         @arguments = parsed
 
