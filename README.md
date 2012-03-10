@@ -1,10 +1,10 @@
+# THIS IS CURRENTLY A WIP. NOT IN A USABLE STATE.
+
 # Snowey
 
 Snowey is a ruby based service for generating uinque, incremental IDs in a distribtued environment (say, load balanced application servers). It's based around a similar idea to [Twitter Snowflake](http://github.com/twitter/snowflake) or [Flake](http://github.com/boundary/flake) except it works on a range basis, each instance of Snowey will alloate itself a range of IDs to use, and re-allocate itself more when it runs out.
 
 Currently the only atomic range store is based on DynamoDB. Support for something like Redis or MySQL might be worked in.
-
-**THIS IS A WIP**
 
 ## Installation
 
