@@ -3,8 +3,8 @@
 require "snowey"
 
 args = Trollop::options do
-	version "Snowey (c) Tom Arnfeld 2012; Version #{Snowey::VERSION}"
-	banner <<-EOS
+  version "Snowey (c) Tom Arnfeld 2012; Version #{Snowey::VERSION}"
+  banner <<-EOS
 Snowey is a service for generating unique incremental ids in a distributed environment
 
 Usage: 
@@ -13,8 +13,8 @@ Usage:
 Available [options]:
 EOS
 
-	opt :address, "Address to listen on (default is #{Snowey::ADDRESS})", :default => Snowey::ADDRESS
-	opt :port, "Port to listen on (default is #{Snowey::PORT})", :default => Snowey::PORT
+  opt :address, "Address to listen on (default is #{Snowey::ADDRESS})", :default => Snowey::ADDRESS
+  opt :port, "Port to listen on (default is #{Snowey::PORT})", :default => Snowey::PORT
 end
 
 # Fire up the snowey service
