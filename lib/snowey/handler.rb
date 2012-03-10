@@ -9,8 +9,19 @@ module Snowey
 		end
 
 		def receive_data data
-			send_data "This is a response"
-			close_connection_after_writing
+			parser = Parser::CommandParser.new(data)
+			command = parser.parse
+
+			close_connection
+
+			# begin
+			# 	response = parser.parse
+			# rescue ParserError => e
+			# 	response = "ERR #{e.message}"
+			# end
+
+			# send_data response
+			# close_connection_after_writing
 		end
 
 		def unbind
