@@ -15,6 +15,7 @@ EOS
 
   opt :address, "Address to listen on (default is #{Snowey::ADDRESS})", :default => Snowey::ADDRESS
   opt :port, "Port to listen on (default is #{Snowey::PORT})", :default => Snowey::PORT
+  opt :verbose, "Log messages into STDOUT (default is true)", :default => Snowey::VERBOSE
 end
 
 # Fire up the snowey service

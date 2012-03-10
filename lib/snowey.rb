@@ -3,15 +3,17 @@
 require "snowey/version"
 require "snowey/constants"
 require "snowey/logger"
-require "snowey/handler"
 require "snowey/parser"
 require "snowey/service"
 
-# 3rd Party Rubygems
+# Rubygems - Required
 require "trollop"
 require "eventmachine"
 
+# Rubygems - Optional
+begin; require "rainbow"; rescue LoadError => e; end
+
 # Setup the available commands
-Snowey::Parser::add_command "STATUS"
-Snowey::Parser::add_command "ID", [:tag]
-Snowey::Parser::add_command "INFO", [:tag]
+Snowey::Parser::CommandManager.add_command "STATUS"
+Snowey::Parser::CommandManager.add_command "ID", [:tag]
+Snowey::Parser::CommandManager.add_command "INFO", [:tag]

@@ -1,48 +1,69 @@
 
 module Snowey
 
-  # The main snowey service manager class
+  # Class for managing the snowey service
   class Service
+
+    class Error < Error; end
+    class ListenError < Error; end
 
     def initialize args
 
-      # Default listen address:port
-      @address  = ADDRESS
-      @port      = PORT
+      @address = args[:address] || ADDRESS
+      @port = args[:port] || PORT
 
-      # Custom listen address:port
-      if args.has_key?(:address)
-        @address = args[:address]
-      end
-
-      if args.has_key?(:port)
-        @port = args[:port]
-      end
-
-      Logger::message "Welcome to Snowey. Version #{VERSION}"
-
-      # Start listening
+      Logger.message "Welcome to Snowey. Version #{VERSION}"
       listen
     end
 
     def listen
       
-      Logger::message "Attempting to listen on #{@address}:#{@port}"
+      Logger.message "Attempting to listen on #{@address}:#{@port}"
 
       EventMachine::run do
 
         Signal.trap("INT") do
           EventMachine.stop
-          Logger::message "Shutting down server, no longer accepting connections"
+          Logger.message "Shutting down server, no longer accepting connections"
         end
         Signal.trap("TERM") do
           EventMachine.stop
-          Logger::message "Shutting down server, no longer accepting connections"
+          Logger.message "Shutting down server, no longer accepting connections"
         end
 
-        EventMachine::start_server @address, @port, Handler
-        Logger::message "Snowey is ready to accept connections on #{@address}:#{@port}"
+        EventMachine::add_periodic_timer(5) {
+          connected = EventMachine::connection_count - 1
+          Logger.message "#{connected} clients connected"
+        }
+
+        EventMachine::start_server @address, @port, ConnectionHandler
+        Logger.message "Snowey is ready to accept connections on #{@address}:#{@port}"
       end
+    end
+  end
+
+  # EventMachine Connection Handler
+  module ConnectionHandler
+
+    def post_init
+      Logger.message "Client connected"
+    end
+
+    def receive_data data
+
+      begin
+        parser = Parser::CommandParser.new(data)
+        output = parser.parse
+        send_data output
+      rescue Parser::Error => e
+        send_data "ERR #{e.message}"
+      end
+
+      close_connection_after_writing
+    end
+
+    def unbind
+      Logger.message "Client disconnected"
     end
   end
 end
