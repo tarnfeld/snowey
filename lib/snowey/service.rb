@@ -12,10 +12,11 @@ module Snowey
       @address = args[:address] || ADDRESS
       @port = args[:port] || PORT
 
-      Logger.verbose(args[:verbose] || VERBOSE)
-      Logger.debug(args[:debug] || DEBUG)
+      Logger.verbose = args[:verbose] if args.has_key?(:verbose)
+      Logger.debug = args[:debug] if args.has_key?(:debug)
 
       Logger.message "Welcome to Snowey. Version #{VERSION}"
+      Logger.debug "Initialized snowey with args #{args}"
       listen
     end
 
@@ -27,10 +28,12 @@ module Snowey
 
         Signal.trap("INT") do
           EventMachine.stop
+          Logger.debug "Caught signal INT"
           Logger.message "Shutting down server, no longer accepting connections"
         end
         Signal.trap("TERM") do
           EventMachine.stop
+          Logger.debug "Caught signal TERM"
           Logger.message "Shutting down server, no longer accepting connections"
         end
 
@@ -53,6 +56,8 @@ module Snowey
     end
 
     def receive_data data
+
+      Logger.debug "Received data '#{data}'"
 
       begin
         parser = Parser::CommandParser.new(data)

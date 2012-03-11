@@ -7,31 +7,32 @@ module Snowey
     @verbose = true
     @debug = false
 
-    def verbose opt
-      @verbose = opt
+    def verbose=(verbose)
+      @verbose = verbose
     end
 
-    def debug opt
-      @debug = opt
+    def debug=(debug)
+      @debug = debug
     end
 
     def message message
-      puts "#{prefix} - #{message}" unless !@verbose
+      puts "#{prefix} - #{message}" if @verbose
     end
 
     def error error
-      puts color("#{prefix} - #{error}", "#FF0000") unless !@verbose
+      puts color("#{prefix} - #{error}", "#FF0000") if @verbose
     end
 
     def debug message
-      puts "#{prefix} #{color(message, '#FFFF0000')}" unless !@debug
+      puts "#{prefix} - #{color(message, '#FFFF00')}" if  @debug
     end
 
-    module_function :verbose
-    module_function :debug
+    module_function :verbose=
+    module_function :debug=
 
     module_function :message
     module_function :error
+    module_function :debug
 
     private
 

@@ -17,5 +17,9 @@ puts connection.gets
 connection.print "STATUS"
 puts connection.gets
 
+# Invalid Command
+connection.print "INVALID"
+puts connection.gets
+
 # Close the connection
 connection.close
