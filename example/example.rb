@@ -10,12 +10,10 @@ opts = {
 connection = TCPSocket.open opts[:address], opts[:port]
 
 # Get ID
-puts "Executing command 'ID twtmore'"
 connection.print "ID twtmore"
 puts connection.gets
 
 # Status
-puts "Executing command 'STATUS'"
 connection.print "STATUS"
 puts connection.gets
 
