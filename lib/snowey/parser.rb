@@ -64,12 +64,17 @@ module Snowey
           raise ExecutionError.new "Invalid number of arguments. #{@arguments.length} passed, #{arguments(@command).length} expected"
         end
 
+        # Convert the arguments into a usable state
+        args = CommandManager.arguments @command
+        @arguments = Hash[args.zip(@arguments)]
+
         # Execute the command
         execute
       end
 
       def execute
         Logger.message "Executing command '#{@command}' with arguments '#{@arguments}'"
+        Commands.const_get(@command).execute(@arguments)
       end
     end
   end

@@ -57,7 +57,7 @@ module Snowey
       begin
         parser = Parser::CommandParser.new(data)
         output = parser.parse
-        send_data "Some output #{output}\n"
+        send_data "#{output}\n"
       rescue Parser::Error => e
         send_data "ERR #{e.message}\n"
       end

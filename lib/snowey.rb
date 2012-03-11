@@ -4,6 +4,9 @@ require "snowey/version"
 require "snowey/constants"
 require "snowey/logger"
 require "snowey/parser"
+require "snowey/commands"
+require "snowey/idmanager"
+require "snowey/rangestore"
 require "snowey/service"
 
 # Rubygems - Required
