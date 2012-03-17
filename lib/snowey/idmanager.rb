@@ -1,6 +1,8 @@
 
 module Snowey
 
+  # Module for managing the various IDAllocation objects for each tag in the global scope
+  # All calls for generating IDs should be via the IDManager
   module IDManager
     @allocations = {}
 
@@ -25,6 +27,8 @@ module Snowey
     end
   end
 
+  # Class for dealing ID allocation for a particular tag
+  # It handles dishing out unique IDs and allocating new ranges to itself when it runs out
   class IDAllocation
 
     def initialize tag
@@ -35,11 +39,11 @@ module Snowey
     end
 
     def info
-      "#{@tag} #{@range_start}:#{@range_end}@#{@range_pointer}"
+      "#{@tag} #{@range_start} : #{@range_end} @ #{@range_pointer}"
     end
 
     def next
-      if (@range_pointer + 1) > @range_end
+      if (@range_pointer+1) > @range_end
         reallocate
       end
       @range_pointer += 1
@@ -55,7 +59,10 @@ module Snowey
 
     def reallocate
       Logger.message "Allocating new range for tag '#{@tag}'", Logger::ALERT
-      # Re-allocate a new range
+
+      @range_start = @range_end
+      @range_end = @range_end + 10
+      @range_pointer = @range_start
     end
   end
 end

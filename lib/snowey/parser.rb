@@ -73,7 +73,7 @@ module Snowey
       end
 
       def execute
-        Logger.message "Executing command '#{@command}' with arguments '#{@arguments}'"
+        Logger.message "Executing command '#{@command}' with arguments '#{@arguments}'", Logger::DEBUG
         Commands.const_get(@command).execute(@arguments)
       end
     end

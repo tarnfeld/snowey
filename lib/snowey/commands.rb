@@ -16,7 +16,7 @@ module Snowey
 
     module INFO
       def execute arguments
-        INFO
+        IDManager.info arguments[:tag]
       end
       module_function :execute
     end

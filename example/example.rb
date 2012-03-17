@@ -13,12 +13,8 @@ connection = TCPSocket.open opts[:address], opts[:port]
 connection.print "ID twtmore"
 puts connection.gets
 
-# Status
-connection.print "STATUS"
-puts connection.gets
-
-# Invalid Command
-connection.print "INVALID"
+# Get INFO
+connection.print "INFO twtmore"
 puts connection.gets
 
 # Close the connection
