@@ -5,16 +5,18 @@ module Snowey
 
     module ID
       def execute arguments
-        manager = IDManager.new
-        manager.generate arguments[:tag]
+        tag = arguments[:tag]
+
+        id = IDManager.generate tag
+        Logger.message "Generated ID '#{id}' for tag '#{tag}'", Logger::DEBUG
+        return id
       end
       module_function :execute
     end
 
     module INFO
       def execute arguments
-        manager = IDManager.new
-        manager.info arguments[:tag]
+        INFO
       end
       module_function :execute
     end

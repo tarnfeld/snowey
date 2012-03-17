@@ -13,10 +13,10 @@ Usage:
 Available [options]:
 EOS
 
-  opt :address, "Address to listen on (default is #{Snowey::ADDRESS})", :default => Snowey::ADDRESS
-  opt :port, "Port to listen on (default is #{Snowey::PORT})", :default => Snowey::PORT
-  opt :verbose, "Log messages into STDOUT (default is true)", :default => Snowey::VERBOSE
-  opt :debug, "Log debug messages into STDOUT (default is false)", :default => Snowey::DEBUG
+  opt :address, "Address to listen on (default is #{Snowey::OPT_ADDRESS})", :default => Snowey::OPT_ADDRESS
+  opt :port, "Port to listen on (default is #{Snowey::OPT_PORT})", :default => Snowey::OPT_PORT
+  opt :verbose, "Log messages into STDOUT (default is #{Snowey::OPT_VERBOSE})", :default => Snowey::OPT_VERBOSE
+  opt :debug, "Log debug messages into STDOUT (default is #{Snowey::OPT_DEBUG})", :default => Snowey::OPT_DEBUG
 end
 
 # Fire up the snowey service

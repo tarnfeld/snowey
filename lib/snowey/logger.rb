@@ -3,6 +3,10 @@ module Snowey
 
   module Logger
 
+    # Flags
+    DEBUG = 1
+    ALERT = 2
+
     # Should the logger be verbose?
     @verbose = true
     @debug = false
@@ -15,16 +19,18 @@ module Snowey
       @debug = debug
     end
 
-    def message message
-      puts "#{prefix} - #{message}" if @verbose
+    def message message, flag = 0
+      if flag == ALERT
+        puts "#{prefix} - #{color(message, '#429dbc')}"
+      elsif flag == DEBUG
+        puts "#{prefix} - #{color(message, '#FFFF00')}" if @debug
+      else
+        puts "#{prefix} - #{message}" if @verbose
+      end
     end
 
     def error error
       puts color("#{prefix} - #{error}", "#FF0000") if @verbose
-    end
-
-    def debug message
-      puts "#{prefix} - #{color(message, '#FFFF00')}" if  @debug
     end
 
     module_function :verbose=
@@ -32,7 +38,6 @@ module Snowey
 
     module_function :message
     module_function :error
-    module_function :debug
 
     private
 
