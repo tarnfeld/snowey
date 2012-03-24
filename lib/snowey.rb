@@ -5,7 +5,7 @@ require "snowey/constants"
 require "snowey/logger"
 require "snowey/parser"
 require "snowey/commands"
-require "snowey/idmanager"
+require "snowey/allocator"
 require "snowey/rangestore"
 require "snowey/service"
 
