@@ -20,6 +20,8 @@ module Snowey
     module_function :store
 
     class Range
+      attr_reader :start, :end, :pointer
+
       def initialize rstart, rend
         @start = rstart
         @end = rend

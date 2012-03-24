@@ -40,7 +40,7 @@ module Snowey
 
     def info
       # This no longer works, pull it out of the current @range
-      "#{@tag} #{@range_start} : #{@range_end} @ #{@range_pointer}"
+      "#{@tag} #{@range.start} : #{@range.end} @ #{@range.pointer}"
     end
 
     def next
