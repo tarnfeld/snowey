@@ -57,7 +57,7 @@ module Snowey
 
     def receive_data data
 
-      Logger.message "Received data '#{data}'", Logger::DEBUG
+      Logger.message "Received data '#{data.chomp}'", Logger::DEBUG
 
       begin
         parser = Parser::CommandParser.new(data)

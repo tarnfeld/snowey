@@ -17,4 +17,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency  "trollop"
   gem.add_dependency  "eventmachine"
+  gem.add_dependency  "redis"
+  gem.add_dependency  "aws"
 end

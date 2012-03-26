@@ -39,7 +39,6 @@ module Snowey
     end
 
     def info
-      # This no longer works, pull it out of the current @range
       "#{@tag} #{@range.start} : #{@range.end} @ #{@range.pointer}"
     end
 
@@ -47,7 +46,6 @@ module Snowey
       if !@range.alive?
         reallocate
       end
-
       # Add in the salt here?
       @range.next
     end
@@ -62,7 +60,7 @@ module Snowey
 
     def reallocate
       Logger.message "Allocating new range for tag '#{@tag}'", Logger::ALERT
-      @range = @store.allocate
+      @range = @store.allocate @tag
     end
   end
 end
