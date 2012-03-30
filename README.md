@@ -1,6 +1,6 @@
 ## WIP
 
-This project is very much in develpment, though the alpha-1 branch should host a relatively working version.
+This project is very much in develpment, though the alpha-1 tag should host a relatively working version.
 
 # Snowey
 
