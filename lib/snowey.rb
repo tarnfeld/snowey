@@ -13,7 +13,7 @@ require "snowey/service"
 require "trollop"
 require "eventmachine"
 require "redis"
-require "aws"
+require "aws-sdk"
 
 # Rubygems - Optional
 begin; require "rainbow"; rescue LoadError => e; end

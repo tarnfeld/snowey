@@ -9,6 +9,16 @@ module Snowey
     class OutOfRange < Error; end
     class InvalidAuthenticatonParam < Error; end
 
+    def auth= auth
+      @auth = auth
+    end
+    module_function :auth=
+
+    def size= size
+      @size = size
+    end
+    module_function :size=
+
     def store
       return @store if @store
       type = @auth.match(/([a-zA-Z]*)\:/)[1]
@@ -52,6 +62,7 @@ module Snowey
     class StoreRedis < Store
       def initialize size, auth
         auth = auth.match(/^[a-z]+\:\/\/([\w\.]+)(:([\d]+))?(\/([\d]+))?/i)
+
         @size = size
         @host = auth[1] || (raise InvalidAuthenticatonParam.new "Host auth param is missing")
         @port = auth[3] || (raise InvalidAuthenticatonParam.new "Port auth param is missing")
@@ -78,8 +89,47 @@ module Snowey
     end
 
     class StoreDynamo < Store
-      # Some methods here for interacting with the data store and allocating a new range
-      # I'm not sure if ruby has interfaces but we should have that shorta thing for these store classes
+      def initialize size, auth
+        auth = auth.match(/^[a-z]+\:\/\/([a-zA-Z0-9]+):([a-zA-Z0-9]+)\/([\w\.]+)$/i)
+
+        @size = size
+        @aws_key = auth[1]
+        @aws_secret = auth[2]
+        @aws_table = auth[3]
+
+        connect
+      end
+
+      def allocate tag
+        tag = "snowey::range::#{tag}"
+        item = @table.items[tag]
+        
+        if item.exists?
+          item.attributes.add(:pointer => @size)
+        else
+          Logger.message "Item for tag #{tag} does not exist in #{@aws_table}. Attempting to create", Logger::DEBUG
+          item = @table.items.create({
+            :tag => tag,
+            :pointer => 0
+          })
+        end
+
+        pointer = item.attributes[:pointer].to_i
+        Range.new pointer, pointer + @size
+      end
+
+      def connect
+        Logger.message "Connecting to dynamodb table #{@aws_table}", Logger::DEBUG
+        @dynamo = AWS::DynamoDB.new(:access_key_id => @aws_key, :secret_access_key => @aws_secret, :dynamo_db_endpoint => "dynamodb.eu-west-1.amazonaws.com")
+        
+        begin
+          @table = @dynamo.tables[@aws_table]
+        rescue ResourceNotFoundException => e
+          throw new InvalidAuthenticatonParam.new "DynamoDB Table #{@aws_table} does not exist"
+        end
+
+        @table.load_schema
+      end
     end
   end
 end

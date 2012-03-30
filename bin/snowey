@@ -12,17 +12,17 @@ Usage:
 
 Available authentication strings:
        redis://0.0.0.0:1234/123 - redis://host:port/database
-       dynamo://abc:123 - dynamo://aws_key:aws_secret
+       dynamo://abc:123/ids - dynamo://aws_key:aws_secret/table
 
 Available [options]:
 EOS
 
-  opt :address, "Address to listen on (default is #{Snowey::OPT_ADDRESS})", :default => Snowey::OPT_ADDRESS
-  opt :port, "Port to listen on (default is #{Snowey::OPT_PORT})", :default => Snowey::OPT_PORT
-  opt :verbose, "Log messages into STDOUT (default is #{Snowey::OPT_VERBOSE})", :default => Snowey::OPT_VERBOSE
-  opt :debug, "Log debug messages into STDOUT (default is #{Snowey::OPT_DEBUG})", :default => Snowey::OPT_DEBUG
-  opt :auth, "Authentication string for the range data store (default is #{Snowey::OPT_AUTH}", :default => Snowey::OPT_AUTH
-  opt :size, "Size of each id range allocation from the data store (default is #{Snowey::OPT_SIZE}", :default => Snowey::OPT_SIZE
+  opt :address, "Address to listen on", :default => Snowey::OPT_ADDRESS
+  opt :port, "Port to listen on", :default => Snowey::OPT_PORT
+  opt :verbose, "Log messages into STDOUT", :default => Snowey::OPT_VERBOSE
+  opt :debug, "Log debug messages into STDOUT", :default => Snowey::OPT_DEBUG
+  opt :auth, "Authentication string for the range data store", :default => Snowey::OPT_AUTH
+  opt :size, "Size of each id range allocation from the data store", :default => Snowey::OPT_SIZE
 end
 
 # Fire up the snowey service

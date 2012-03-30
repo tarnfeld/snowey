@@ -12,6 +12,9 @@ module Snowey
       @address = args[:address] || OPT_ADDRESS
       @port = args[:port] || OPT_PORT
 
+      RangeStore.auth = args[:auth] || OPT_AUTH
+      RangeStore.size = args[:size] || OPT_SIZE
+
       Logger.verbose = args[:verbose]  || OPT_VERBOSE
       Logger.debug = args[:debug] || OPT_DEBUG
 

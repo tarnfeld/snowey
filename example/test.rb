@@ -15,6 +15,7 @@ tag = "twtmore"
 for i in 0..100000 do
 	connection.print "ID #{tag}"
 	x = connection.gets
+	p x
 end
 
 fin = Time.now

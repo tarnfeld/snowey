@@ -7,7 +7,7 @@ module Snowey
   OPT_VERBOSE = true
   OPT_DEBUG = false
   OPT_AUTH = "redis://0.0.0.0:6379"
-  OPT_SIZE = 10
+  OPT_SIZE = 1000
 
   class Error < StandardError; end
   

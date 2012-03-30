@@ -46,16 +46,7 @@ module Snowey
       if !@range.alive?
         reallocate
       end
-      # Add in the salt here?
       @range.next
-    end
-
-    def machine_identifier
-      # Get the machine identifier
-    end
-
-    def prefix
-      # Get the id prefix
     end
 
     def reallocate
