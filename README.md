@@ -1,4 +1,6 @@
-# THIS IS CURRENTLY A WIP. NOT IN A USABLE STATE.
+## WIP
+
+This project is very much in develpment, though the alpha-1 branch should host a relatively working version.
 
 # Snowey
 
