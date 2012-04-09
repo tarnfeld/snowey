@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Snowey by tarnfeld</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Snowey</h1>
+        <h2>Snowey is a ruby based unique identifier service, designed to run in a distributed environment to generate incremental identifiers.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/tarnfeld/snowey/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/tarnfeld/snowey/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/tarnfeld/snowey" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h2>WIP</h2>
+
+<p>This project is very much in development, though the alpha-1 tag should host a relatively working version.</p>
+
+<h1>Snowey</h1>
+
+<p>Snowey is a ruby based service for generating unique, incremental IDs in a distributed environment (say, load balanced application servers). It's based around a similar idea to <a href="http://github.com/twitter/snowflake">Twitter Snowflake</a> or <a href="http://github.com/boundary/flake">Flake</a> except it works on a range basis, each instance of Snowey will alloate itself a range of IDs to use, and re-allocate itself more when it runs out.</p>
+
+<p>Currently the only atomic range store is based on DynamoDB. Support for something like Redis or MySQL might be worked in.</p>
+
+<h2>Installation</h2>
+
+<p>Ensure you have rubygems installed, and ruby 1.9.3 or newer. To install the gem via rubygems</p>
+
+<pre><code>gem install snowey
+</code></pre>
+
+<p>You can compile and install them gem yourself with the following commands (rake required)</p>
+
+<pre><code>git clone git://github.com/tarnfeld/snowey.git
+cd snowey &amp;&amp; rake install
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>To start up snowey, execute the following command. This will start a snowey server listening on all network interfaces on port 2478</p>
+
+<pre><code>snowey
+</code></pre>
+
+<p>To see available options, execute the following comand</p>
+
+<pre><code>snowey --help
+</code></pre>
+
+<h2>Client Usage</h2>
+
+<p>When you have an instance of Snowey up and running, you can issue commands via the listening TCP Socket.</p>
+
+<h3>Introduction</h3>
+
+<p>For a real basic introduction, fire up your terminal and execute the following. You may need to modify the address or port if you've changed that.</p>
+
+<pre><code>telnet 0.0.0.0 2478
+</code></pre>
+
+<p>Now you can begin typing in commands (see below) and get results.</p>
+
+<h3>Client Libraries</h3>
+
+<p>I'll soon be working on a PHP client library for Snowey, but thats not built yet. If any body fancies building a client feel free to submit them to me and i'll list it here.</p>
+
+<h2>Commands</h2>
+
+<p>Here's a short list of the available commands in Snowey...</p>
+
+<table>
+<tr>
+<th align="left">Command</th>
+<th align="left">Arguments</th>
+<th align="left">Description</th>
+</tr>
+<tr>
+<td align="left">ID</td>
+<td align="left">tag</td>
+<td align="left">Generate a unique identifier for the given tag. It is recommended you name your tag the same as your database table to help with namespacing</td>
+</tr>
+<tr>
+<td align="left">INFO</td>
+<td align="left">tag</td>
+<td align="left">Display some information about a given tag, such as the current range, position etc.</td>
+</tr>
+<tr>
+<td align="left">STATUS</td>
+<td align="left">n/a</td>
+<td align="left">Display a bit of information about the snowey system status</td>
+</tr>
+</table><h2>Contributing</h2>
+
+<ol>
+<li>Fork Snowey</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request in Github</li>
+</ol>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
